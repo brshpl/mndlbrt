@@ -1,0 +1,13 @@
+= form_for post do |f|
+  = render 'shared/errors', object: post
+  %div
+    = f.label :image
+    = f.file_field :image
+    = f.hidden_field :image_cache
+    = f.hidden_field :author, value: current_user.email
+    - if post.image?
+      = image_tag post.image.thumb.url
+      %div
+        = f.label :remove_image
+        = f.check_box :remove_image
+  = f.submit

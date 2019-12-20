@@ -1,0 +1,5 @@
+- if object.errors.any?
+  %h3 Some errors were found:
+  %ul
+    - object.errors.full_messages.each do |message|
+      %li= message
