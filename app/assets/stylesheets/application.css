@@ -13,3 +13,48 @@
  *= require_tree .
  *= require_self
  */
+html{
+    font-family: 'Fira Sans', sans-serif;
+}
+h1{
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+.field{
+    margin-top: 10px;
+    text-align: center;
+}
+.actions{
+    text-align: center;
+}
+.text-field{
+    border-radius: 20px;
+    height: 30px;
+    width: 250px;
+}
+a{
+    font-size: 20px;
+    color: red;
+    text-decoration: none;
+}
+#header{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#logo{
+    font-size: 40px;
+    font-family: 'Comfortaa', cursive;
+    width: 250px;
+}
+#auth_buttons{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#locales{
+    flex-basis: 250px;
+    flex-grow: 1;
+}

@@ -1,0 +1,30 @@
+ru:
+  helpers:
+    submit:
+      post:
+        create: 'Создать'
+        update: 'Добавить'
+  posts:
+    new:
+      title: 'Добавить запись'
+    show:
+      author: 'Пост '
+      edit: "Изменить"
+      to_all: "Ко всем записям"
+      delete: "Удалить"
+  devise:
+    sessions:
+      new:
+        enter-title: 'Вход'
+        enter-btn: 'Войти'
+    registrations:
+      new-title: 'Регистрация'
+      new-btn: 'Зарегистрироваться'
+    shared:
+      links:
+        enter-title: 'Вход'
+        new-title: 'Регистрация'
+        forgot-password: 'Забыли пароль?'
+    passwords:
+      title: 'Забыли пароль?'
+      btn: 'Отправить инструкции по восстановлению на почту'

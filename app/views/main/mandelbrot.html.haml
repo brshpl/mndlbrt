@@ -1,0 +1,58 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title Mandelbrot
+    %link{:href => "https://fonts.googleapis.com/css?family=Exo+2", :rel => "stylesheet"}/
+  %body#overflow
+    %canvas#canvas
+
+    .controls
+      #pure_mandelbrot.button.color
+        = t('main.mandelbrot.monochrome')
+      #BW.button.color
+        = t('main.mandelbrot.BW')
+      #BW_recursive.button.color
+        = t('main.mandelbrot.BW_recursive')
+      #sunshine.button.color
+        = t('main.mandelbrot.sunshine')
+      #inferno.button.color
+        = t('main.mandelbrot.inferno')
+      #inferno_recursive.button.color
+        = t('main.mandelbrot.inferno_recursive')
+      #gothic.button.color
+        = t('main.mandelbrot.gothic')
+      #gothic_recursive.button.color
+        = t('main.mandelbrot.gothic_recursive')
+      #flame.button.color
+        = t('main.mandelbrot.flame')
+      #l_in_d.button.color
+        = t('main.mandelbrot.l_in_d')
+      #acid.button.color
+        = t('main.mandelbrot.acid')
+      .button.iteration
+        %span#iterations
+          = t('main.mandelbrot.iterations')
+        %br/
+        %input#iteration_button{:max => "3000", :min => "50", :name => "points",  :type => "range", :value => "50"}/
+      #final.button.render_save
+        = t('main.mandelbrot.final')
+      #save.button.render_save
+        = t('main.mandelbrot.save')
+    #places
+      #star.button.place
+        = t('main.mandelbrot.star')
+      #tornado.button.place
+        = t('main.mandelbrot.tornado')
+      #satellite.button.place
+        = t('main.mandelbrot.satellite')
+      #valley1.button.place
+        = t('main.mandelbrot.valley1')
+      #valley2.button.place
+        = t('main.mandelbrot.valley2')
+      %br/
+      #burning_ship.button.place
+        = t('main.mandelbrot.burning_ship')
+
+    = javascript_pack_tag 'mandelbrot', 'data-turbolinks-track': 'reload'

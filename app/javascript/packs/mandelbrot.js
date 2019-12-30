@@ -1,3 +1,16 @@
+//= require jquery
+//= require jquery_ujs
+
+let WORKER_PATH = 'http://localhost:3000/worker.js';
+const WORKER_JS = 'http://localhost:3000/worker.js';
+const WORKER_BURNING_SHIP_JS = 'http://localhost:3000/worker_burning_ship.js';
+let str_star        = document.getElementById('star').innerText;
+let str_tornado     = document.getElementById('tornado').innerText;
+let str_satellite   = document.getElementById('satellite').innerText;
+let str_valley1     = document.getElementById('valley1').innerText;
+let str_valley2     = document.getElementById('valley2').innerText;
+let str_burn_ship   = document.getElementById('burning_ship').innerText;
+
 function map(value, domain, range, isDecel){
     if (isDecel){
         return range[0] + (range[1] - range[0]) * interCubeDecel((value - domain[0]) / (domain[1] - domain[0]));
@@ -35,7 +48,7 @@ function mapColor(value,domain,rgb1,rgb2){
 }
 
 function Mandelbrot(){
-    this.ratio          = .5;                                    //window.devicePixelRatio * 2;
+    this.ratio          = .5;
     this.canvas         = document.getElementById('canvas');
     this.canvas.width   = window.innerWidth  * this.ratio;
     this.canvas.height  = window.innerHeight * this.ratio;
@@ -45,44 +58,19 @@ function Mandelbrot(){
     this.vcanvas.width  = this.canvas.width;
     this.vcanvas.height = this.canvas.height;
     this.vctx           = this.vcanvas.getContext('2d');
-    this.palette        = 3;
+    this.palette        = 4;
 
-    //this.zoom = 20000000;                           //Satellite valley (VERY SLOW)
-    //this.center = {x: -.74364386, y: .1318259};
-    //this.maxIterations = 3000;
-
-    //this.zoom = 3000000;                            //Satellite valley 2 (VERY SLOW)
-    //this.center = {x: -.7667868, y: .10826};
-    //this.maxIterations = 3000;
-
-    //this.zoom = 200000;                             //Satellite
-    //this.center = {x: -.743643, y: .131826};
-    //this.maxIterations = 1600;
-
-    //this.zoom = 1000;                               //Star
-    //this.center = {x: -.81045, y: .20175};
-    //this.maxIterations = 180;
-
-    //this.zoom = 600;                                //Wally
-    //this.center = {x: -.7674, y: .108};
-    //this.maxIterations = 360;
-
-    this.zoom = 0.8;                                  //Initial
+    this.zoom = 0.8;
     this.center = {x: -1, y: 0};
     this.maxIterations = 50;
 
-    //this.zoom = 150                                 //Burning ship (needs change in worker code)
-    //this.center = {x: 1.624, y: 0.01};
-    //this.maxIterations = 80;
-
-    //this.maxIterations = function() {return Math.floor(map(this.zoom,[1,2000000],[50,3000]))};
     this.range = function() {return 1 / this.zoom};
     this.scale = function() {return this.canvas.height / (this.range() * 2)};
     this.bias  = function() {return {x:   this.canvas.width  / 2 - this.center.x * this.scale(),
                                      y: - this.canvas.height / 2 - this.center.y * this.scale()}};
 
-    this.renderUnit = function(ctx,message){
-        this.worker = new Worker('packs/js/worker-9df8c22d0e0a704f758f.js');
+    this.renderUnit = function(ctx, message){
+        this.worker = new Worker(WORKER_PATH);
         this.worker.onmessage = function(event){
             ctx.putImageData(event.data.map,
                              event.data.origin.x,
@@ -126,7 +114,7 @@ function Mandelbrot(){
     };
 
     this.canvas.addEventListener('click', function(e){
-        if (e.clientX < 0.9 * this.canvas.width / this.ratio){
+        if (!e.shiftKey) {
             this.center = {x: ( e.clientX * this.ratio - this.bias().x) / this.scale(),
                            y: (-e.clientY * this.ratio - this.bias().y) / this.scale()};
             this.zoom *= 2;
@@ -162,5 +150,120 @@ Mandelbrot.prototype.render = function(){
     this.showMessage('');
 };
 
+function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type:mimeString});
+}
+
 var mandelbrot = new Mandelbrot();
 mandelbrot.render();
+
+document.getElementById('pure_mandelbrot').onclick    = function () { mandelbrot.setColors(1) };
+document.getElementById('BW_recursive').onclick       = function () { mandelbrot.setColors(2) };
+document.getElementById('sunshine').onclick           = function () { mandelbrot.setColors(3) };
+document.getElementById('inferno_recursive').onclick  = function () { mandelbrot.setColors(4) };
+document.getElementById('gothic_recursive').onclick   = function () { mandelbrot.setColors(5) };
+document.getElementById('gothic').onclick             = function () { mandelbrot.setColors(6) };
+document.getElementById('flame').onclick              = function () { mandelbrot.setColors(7) };
+document.getElementById('l_in_d').onclick             = function () { mandelbrot.setColors(8) };
+document.getElementById('inferno').onclick            = function () { mandelbrot.setColors(9) };
+document.getElementById('acid').onclick               = function () { mandelbrot.setColors(10) };
+document.getElementById('BW').onclick                 = function () { mandelbrot.setColors(11) };
+
+document.getElementById('iteration_button').onmouseup = function () { mandelbrot.refine(1, Math.round(this.value)) };
+document.getElementById('iteration_button').oninput   = function () {
+    document.getElementById('iterations').innerHTML = Math.round(this.value) + ' итераций';
+};
+
+$('#places').on('click', '#star', function () {
+    mandelbrot.zoom = 800;
+    mandelbrot.center = {x: -.8115, y: .2015};
+    mandelbrot.maxIterations = 180;
+    mandelbrot.render();
+});
+$('#places').on('click', '#tornado', function () {
+    mandelbrot.zoom = 600;
+    mandelbrot.center = {x: -.7674, y: .108};
+    mandelbrot.maxIterations = 360;
+    mandelbrot.render();
+});
+$('#places').on('click', '#satellite', function () {
+    mandelbrot.zoom = 200000;
+    mandelbrot.center = {x: -.743643, y: .131826};
+    mandelbrot.maxIterations = 1600;
+    mandelbrot.render();
+});
+$('#places').on('click', '#valley1', function () {
+    mandelbrot.zoom = 3000000;
+    mandelbrot.center = {x: -.7667868, y: .10826};
+    mandelbrot.maxIterations = 3000;
+    mandelbrot.render();
+});
+$('#places').on('click', '#valley2', function () {
+    mandelbrot.zoom = 20000000;
+    mandelbrot.center = {x: -.74364386, y: .1318259};
+    mandelbrot.maxIterations = 3000;
+    mandelbrot.render();
+});
+$('#places').on('click', '#burning_ship', function () {
+    WORKER_PATH = WORKER_BURNING_SHIP_JS;
+    mandelbrot.zoom = 50;
+    mandelbrot.center = {x: 1.624, y: 0.01};
+    mandelbrot.maxIterations = 80;
+    mandelbrot.setColors(7);
+    mandelbrot.render();
+    document.getElementById('places').innerHTML =
+        '<div class=\'button place\' id=\'mandelbrot\'>Back</div>';
+});
+$('#places').on('click', '#mandelbrot', function () {
+    WORKER_PATH = WORKER_JS;
+    mandelbrot.zoom = 0.8;
+    mandelbrot.center = {x: -1, y: 0};
+    mandelbrot.maxIterations = 50;
+    mandelbrot.setColors(4);
+    mandelbrot.render();
+    document.getElementById('places').innerHTML =
+        '<div class=\'button place\' id=\'star\'>' + str_star + '</div>\n' +
+        '<div class=\'button place\' id=\'tornado\'>' + str_tornado + '</div>\n' +
+        '<div class=\'button place\' id=\'satellite\'>' + str_satellite + '</div>\n' +
+        '<div class=\'button place\' id=\'valley1\'>' + str_valley1 + '</div>\n' +
+        '<div class=\'button place\' id=\'valley2\'>' + str_valley2 + '</div>\n' +
+        '<br>\n' +
+        '<div class=\'button place\' id=\'burning_ship\'>' + str_burn_ship + '</div>';
+});
+
+document.getElementById('final').onclick = function () { mandelbrot.refine(3) };
+document.getElementById('save').onclick = function () {
+    if(document.getElementById('email') != null) {
+        const AUTH_TOKEN = jQuery('meta[name=csrf-token]').attr('content');
+        let dataURL = document.getElementById('canvas').toDataURL('image/png', 1.0);
+        let blob = dataURItoBlob(dataURL);
+        let formData = new FormData(document.forms[0]);
+        formData.append('authenticity_token', AUTH_TOKEN);
+        let file = new File([blob], 'canvasImage.png', {type: 'image/png'});
+        formData.append('post[image]', file);
+        let email = document.getElementById('email').innerText;
+        email = email.substr(0, email.length-1);
+        formData.append('post[author]', email);
+        let request = new XMLHttpRequest();
+        request.open("POST", "http://localhost:3000/posts#create");
+        request.send(formData);
+    } else{
+        alert('Please login to post pictures');
+    }
+};

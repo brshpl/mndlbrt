@@ -1,0 +1,38 @@
+body, html  {margin:0; width: 100%; height: 100%; }
+#overflow { overflow: hidden; }
+canvas { width:100%; height:100%; }
+.button{
+    position: relative;
+    margin: 0 10px 10px 0;
+    background: rgba(0,0,0,.3);
+    border-radius: 2px;
+    padding: 10px;
+    color: rgb(255,255,255);
+    z-index: 2;
+    cursor: pointer;
+    font: 11px 'Exo 2';
+    text-align: center;
+    margin-top: 10px;
+}
+.color{
+    background: rgba(0,0,100,.3);
+}
+.place{
+    background: rgba(0,0,100,.3);
+}
+.iteration{
+    background: rgba(0,0,0,.1);
+}
+.render_save{
+    background: rgba(0,0,0,.5);
+}
+.controls{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+#places{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

@@ -79,18 +79,12 @@ onmessage = function(event){
         let iterations = 0;
         for (let i = 0; i < maxIterations; i++){
 
-            let zSquare = {x: z.x * z.x - z.y * z.y,
-                           y: 2   * z.x       * z.y};		                    //Mandelbrot
-            z.x = probe.x + zSquare.x;
-            z.y = probe.y + zSquare.y;
-            value = (z.x * z.x + z.y * z.y);
-            /*
-            let tempX = z.x * z.x -  z.y * z.y  - probe.x;						//Burning ship
+            let tempX = z.x * z.x -  z.y * z.y  - probe.x;
             let tempY = 2 * Math.abs(z.x * z.y) - probe.y;
             z.x = tempX;
             z.y = tempY;
             value = (z.x * z.x + z.y * z.y);
-            */
+
             if (value <= 16) {
                 iterations ++;
                 final = true;

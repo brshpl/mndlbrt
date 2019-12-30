@@ -1,0 +1,25 @@
+.title= t('main.index.title')
+.text
+  = t('main.index.first')
+  z
+  %sub> n+1
+  \=z
+  %sub> n
+  %sup> 2
+  +c
+  = t('main.index.second')
+  z
+  %sub> 0
+  \=0
+  = t('main.index.third')
+  |z
+  %sub> n
+  | < R
+  = t('main.index.fourth')
+.text
+  = t('main.index.fifth')
+  = link_to t('main.index.sixth'), mandelbrot_path
+  = t('main.index.seventh')
+  = link_to t('main.index.eighth'), posts_path
+  = t('main.index.nineth')
+= image_tag('/mandelbrot_pic.jpg', alt: 'Image', id: 'main_image')
