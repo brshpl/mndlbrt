@@ -1,24 +1,5 @@
-# README
+# MNDLBRT
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Онлайн навигатор по множеству Мандельброта
+Множество Мандельброта — это множество таких точек c на комплексной плоскости, для которых рекуррентное соотношение zn+1=zn2+c при z0=0 задаёт ограниченную последовательность. То есть, это множество таких c, для которых существует такое действительное R, что неравенство |zn| < R выполняется при всех натуральных n.
+На этом сайте вы можете исследовать множество Мандельброта с помощью онлайн-редактора, а так же делиться скриншотами красивых или необычных областей графика этого множества.
