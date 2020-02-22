@@ -1,11 +1,13 @@
-%h2.sessions
-  =t('devise.passwords.title')
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .actions
-    = f.submit t('devise.passwords.btn'), class: 'button'
-= render "devise/shared/links"
+.columns.is-mobile
+  .column.is-one-fifth-desktop.is-offset-two-fifths-desktop.is-full-mobile
+    %h2.sessions
+      =t('devise.passwords.title')
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .field
+        = f.label :email
+        %br/
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: "input"
+      .actions
+        = f.submit t('devise.passwords.btn'), class: 'button is-link'
+    = render "devise/shared/links"

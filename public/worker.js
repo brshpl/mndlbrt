@@ -10,15 +10,15 @@ onmessage = function(event){
         }
     }
     function interCubeDecel(x){
-        v0 = -2;
-        v1 = 0;
-        v2 = 1;
-        v3 = 0;
+        let v0 = -2;
+        let v1 = 0;
+        let v2 = 1;
+        let v3 = 0;
 
-        P = (v3 - v2) - (v0 - v1);
-        Q = (v0 - v1) - P;
-        R = v2 - v0;
-        S = v1;
+        let P = (v3 - v2) - (v0 - v1);
+        let Q = (v0 - v1) - P;
+        let R = v2 - v0;
+        let S = v1;
 
         return P * x*x*x + Q * x*x + R * x + S;
     }

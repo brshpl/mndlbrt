@@ -1,3 +1,4 @@
+@import "bulma";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,6 +14,71 @@
  *= require_tree .
  *= require_self
  */
+canvas#canvas { width:100%; height:100%; }
+.button-ctrl{
+  position: relative;
+  margin: 0 10px 10px 0;
+  background: rgba(0,0,0,.3);
+  border-radius: 2px;
+  padding: 10px;
+  color: rgb(255,255,255);
+  z-index: 2;
+  cursor: pointer;
+  font: 11px 'Exo 2';
+  text-align: center;
+  margin-top: 10px;
+}
+#overflow { overflow: hidden; }
+.button-ctrl{
+  position: relative;
+  margin: 0 10px 10px 0;
+  background: rgba(0,0,0,.3);
+  border-radius: 2px;
+  padding: 10px;
+  color: rgb(255,255,255);
+  z-index: 2;
+  cursor: pointer;
+  font: 11px 'Exo 2';
+  text-align: center;
+  margin-top: 10px;
+}
+.color{
+  background: rgba(0,0,100,.3);
+}
+.place{
+  background: rgba(0,0,100,.3);
+}
+.iteration{
+  background: rgba(0,0,0,.1);
+}
+.render_save{
+  background: rgba(0,0,0,.5);
+}
+.controls{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+#places{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 html{
     font-family: 'Fira Sans', sans-serif;
 }
@@ -47,7 +113,7 @@ a{
 #logo{
     font-size: 40px;
     font-family: 'Comfortaa', cursive;
-    width: 250px;
+    color: white;
 }
 #auth_buttons{
     position: absolute;

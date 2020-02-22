@@ -9,50 +9,50 @@
     %canvas#canvas
 
     .controls
-      #pure_mandelbrot.button.color
+      #pure_mandelbrot.button-ctrl.color
         = t('main.mandelbrot.monochrome')
-      #BW.button.color
+      #BW.button-ctrl.color
         = t('main.mandelbrot.BW')
-      #BW_recursive.button.color
+      #BW_recursive.button-ctrl.color
         = t('main.mandelbrot.BW_recursive')
-      #sunshine.button.color
+      #sunshine.button-ctrl.color
         = t('main.mandelbrot.sunshine')
-      #inferno.button.color
+      #inferno.button-ctrl.color
         = t('main.mandelbrot.inferno')
-      #inferno_recursive.button.color
+      #inferno_recursive.button-ctrl.color
         = t('main.mandelbrot.inferno_recursive')
-      #gothic.button.color
+      #gothic.button-ctrl.color
         = t('main.mandelbrot.gothic')
-      #gothic_recursive.button.color
+      #gothic_recursive.button-ctrl.color
         = t('main.mandelbrot.gothic_recursive')
-      #flame.button.color
+      #flame.button-ctrl.color
         = t('main.mandelbrot.flame')
-      #l_in_d.button.color
+      #l_in_d.button-ctrl.color
         = t('main.mandelbrot.l_in_d')
-      #acid.button.color
+      #acid.button-ctrl.color
         = t('main.mandelbrot.acid')
-      .button.iteration
+      .button-ctrl.iteration
         %span#iterations
           = t('main.mandelbrot.iterations')
         %br/
         %input#iteration_button{:max => "3000", :min => "50", :name => "points",  :type => "range", :value => "50"}/
-      #final.button.render_save
+      #final.button-ctrl.render_save
         = t('main.mandelbrot.final')
-      #save.button.render_save
+      #save.button-ctrl.render_save
         = t('main.mandelbrot.save')
     #places
-      #star.button.place
+      #star.button-ctrl.place
         = t('main.mandelbrot.star')
-      #tornado.button.place
+      #tornado.button-ctrl.place
         = t('main.mandelbrot.tornado')
-      #satellite.button.place
+      #satellite.button-ctrl.place
         = t('main.mandelbrot.satellite')
-      #valley1.button.place
+      #valley1.button-ctrl.place
         = t('main.mandelbrot.valley1')
-      #valley2.button.place
+      #valley2.button-ctrl.place
         = t('main.mandelbrot.valley2')
       %br/
-      #burning_ship.button.place
+      #burning_ship.button-ctrl.place
         = t('main.mandelbrot.burning_ship')
 
     = javascript_pack_tag 'mandelbrot', 'data-turbolinks-track': 'reload'

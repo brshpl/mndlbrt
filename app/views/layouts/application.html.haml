@@ -2,30 +2,42 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     %title MNDLBRT
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     %link{href: "https://fonts.googleapis.com/css?family=Comfortaa|Fira+Sans&display=swap", rel: "stylesheet"}/
+    %script{:crossorigin => "anonymous", :src => "https://kit.fontawesome.com/cc801640fc.js"}
   %body
-    #header
-      =link_to 'MNDLBRT', root_path, {id: 'logo'}
-      #locales
-        %li.nav-item
-          = link_to "Рус", { locale: :ru }, class: "nav-link"
-        %li.nav-item
-          = link_to "En", { locale: :en }, class: "nav-link"
-      #auth_buttons
-        - if user_signed_in?
-          %span
-            = t('layouts.application.greetings')
-            %span#email
-              #{current_user.email}
-          = link_to t('layouts.application.sign_out'), destroy_user_session_path, :method => :delete
-        - else
-          = link_to t('layouts.application.sign_in'), new_user_session_path
-          или #{link_to t('layouts.application.sign_up'), new_user_registration_path}
+
+
+
+
+    %nav.is-dark.navbar{"aria-label" => "main navigation", role: "navigation"}
+      .navbar-brand
+        =link_to 'MNDLBRT', root_path, {id: 'logo'}
+        %a.navbar-burger.burger{"aria-expanded" => "false", "aria-label" => "menu", "data-target" => "navbarBasicExample", role: "button"}
+          %span{"aria-hidden" => "true"}
+          %span{"aria-hidden" => "true"}
+          %span{"aria-hidden" => "true"}
+      #navbarBasicExample.navbar-menu
+        .navbar-start
+          =link_to "Рус", { locale: :ru }, class: "navbar-item"
+          =link_to "En", { locale: :en }, class: "navbar-item"
+        .navbar-end
+          .navbar-item
+            .buttons
+              -if user_signed_in?
+                = t('layouts.application.greetings')
+                %span#email
+                  #{current_user.email}
+                =link_to t('layouts.application.sign_out'), destroy_user_session_path, :method => :delete, class: "button is-danger"
+              - else
+                =link_to t('layouts.application.sign_up'), new_user_registration_path, class: "button is-primary"
+                =link_to t('layouts.application.sign_in'), new_user_session_path, class: "button is-light"
+
     %p.notice= notice
     %p.alert= alert
     = yield

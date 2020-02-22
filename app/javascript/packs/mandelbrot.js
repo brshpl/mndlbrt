@@ -22,15 +22,15 @@ function map(value, domain, range, isDecel){
 }
 
 function interCubeDecel(x){
-    v0 = -2;
-    v1 = 0;
-    v2 = 1;
-    v3 = 0;
+    let v0 = -2;
+    let v1 = 0;
+    let v2 = 1;
+    let v3 = 0;
 
-    P = (v3 - v2) - (v0 - v1);
-    Q = (v0 - v1) - P;
-    R = v2 - v0;
-    S = v1;
+    let P = (v3 - v2) - (v0 - v1);
+    let Q = (v0 - v1) - P;
+    let R = v2 - v0;
+    let S = v1;
 
     return P*x*x*x + Q*x*x + R*x + S;
 }
@@ -228,7 +228,7 @@ $('#places').on('click', '#burning_ship', function () {
     mandelbrot.setColors(7);
     mandelbrot.render();
     document.getElementById('places').innerHTML =
-        '<div class=\'button place\' id=\'mandelbrot\'>Back</div>';
+        '<div class=\'button-ctrl place\' id=\'mandelbrot\'>Back</div>';
 });
 $('#places').on('click', '#mandelbrot', function () {
     WORKER_PATH = WORKER_JS;
@@ -238,13 +238,13 @@ $('#places').on('click', '#mandelbrot', function () {
     mandelbrot.setColors(4);
     mandelbrot.render();
     document.getElementById('places').innerHTML =
-        '<div class=\'button place\' id=\'star\'>' + str_star + '</div>\n' +
-        '<div class=\'button place\' id=\'tornado\'>' + str_tornado + '</div>\n' +
-        '<div class=\'button place\' id=\'satellite\'>' + str_satellite + '</div>\n' +
-        '<div class=\'button place\' id=\'valley1\'>' + str_valley1 + '</div>\n' +
-        '<div class=\'button place\' id=\'valley2\'>' + str_valley2 + '</div>\n' +
+        '<div class=\'button-ctrl place\' id=\'star\'>'         + str_star + '</div>\n' +
+        '<div class=\'button-ctrl place\' id=\'tornado\'>'      + str_tornado + '</div>\n' +
+        '<div class=\'button-ctrl place\' id=\'satellite\'>'    + str_satellite + '</div>\n' +
+        '<div class=\'button-ctrl place\' id=\'valley1\'>'      + str_valley1 + '</div>\n' +
+        '<div class=\'button-ctrl place\' id=\'valley2\'>'      + str_valley2 + '</div>\n' +
         '<br>\n' +
-        '<div class=\'button place\' id=\'burning_ship\'>' + str_burn_ship + '</div>';
+        '<div class=\'button-ctrl place\' id=\'burning_ship\'>' + str_burn_ship + '</div>';
 });
 
 document.getElementById('final').onclick = function () { mandelbrot.refine(3) };
@@ -258,7 +258,7 @@ document.getElementById('save').onclick = function () {
         let file = new File([blob], 'canvasImage.png', {type: 'image/png'});
         formData.append('post[image]', file);
         let email = document.getElementById('email').innerText;
-        email = email.substr(0, email.length-1);
+        email = email.substr(0, email.length);
         formData.append('post[author]', email);
         let request = new XMLHttpRequest();
         request.open("POST", "http://localhost:3000/posts#create");

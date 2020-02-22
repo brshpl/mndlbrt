@@ -1,2 +1,4 @@
-%h1= t('posts.edit.title')
-= render 'form', post: @post
+.columns.is-mobile
+  .column.is-three-fifths-desktop.is-offset-one-fifth-desktop.is-full-mobile
+    %h1= t('posts.edit.title')
+    = render 'form', post: @post

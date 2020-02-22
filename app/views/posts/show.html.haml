@@ -1,7 +1,10 @@
-= link_to t('posts.show.to_all'), posts_path
-%p
-  = t('posts.show.author')
-  = @post.author
-%div= link_to(image_tag(@post.image.big_thumb.url, alt: 'Image'), @post.image.url, target: '_blank') if @post.image?
-- if current_user.email == @post.author
-  %p= link_to t('posts.show.edit'), edit_post_path(@post)
+.columns.is-mobile
+  .column.is-three-fifths-desktop.is-offset-one-fifth-desktop.is-full-mobile
+    %br
+    = link_to t('posts.show.to_all'), posts_path, class: "button is-link"
+    %p
+      = t('posts.show.author')
+      = @post.author
+    %div= link_to(image_tag(@post.image.big_thumb.url, alt: 'Image'), @post.image.url, target: '_blank') if @post.image?
+    - if current_user.email == @post.author
+      %p= link_to t('posts.show.edit'), edit_post_path(@post), class: "button is-link"

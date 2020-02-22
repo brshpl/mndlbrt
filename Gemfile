@@ -70,3 +70,5 @@ gem 'file_validators'
 gem 'mini_magick'
 
 gem 'jquery-rails'
+
+gem 'bulma-rails'

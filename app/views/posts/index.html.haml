@@ -1,3 +1,5 @@
-%h1= t('posts.index.title')
-= link_to t('posts.index.add_post'), new_post_path
-= render @posts
+.columns.is-mobile
+  .column.is-three-fifths-desktop.is-offset-one-fifth-desktop.is-full-mobile
+    %h1.label= t('posts.index.title')
+    = link_to t('posts.index.add_post'), new_post_path, class: "button is-primary"
+    = render @posts
